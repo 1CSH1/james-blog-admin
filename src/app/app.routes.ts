@@ -4,5 +4,9 @@ export const appRoutes: Routes = [
   {
     path: "",
     loadChildren: "./admin/admin.module#AdminModule"
+  },
+  {
+    path: "**",
+    loadChildren: "./admin/admin.module#AdminModule"
   }
 ]

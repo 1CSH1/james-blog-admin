@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { IndexComponent } from './index/index.component';
 import {RouterModule} from "@angular/router";
 import {adminRoutes} from "./admin.routes";
+import { PostComponent } from './post/post.component';
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     RouterModule,
     RouterModule.forChild(adminRoutes)
   ],
   declarations: [
-    IndexComponent
+    IndexComponent,
+    PostComponent
   ]
 })
 export class AdminModule { }

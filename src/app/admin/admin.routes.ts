@@ -6,11 +6,14 @@ import {IndexComponent} from "./index/index.component";
 export const adminRoutes: Routes = [
   {
     path: "",
-    redirectTo: "index",
-    pathMatch: "full"
+    component: IndexComponent
   },
   {
     path: "index",
     component: IndexComponent
-  }
+  },
+  {
+    path: "**",
+    component: IndexComponent
+  },
 ]
