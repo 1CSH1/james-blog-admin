@@ -7,9 +7,11 @@ import {appRoutes} from "./app.routes";
 import {AdminModule} from "./admin/admin.module";
 import {Http, HttpModule} from "@angular/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbButtonsModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 export function createTranslateHttpLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +41,11 @@ export function createTranslateHttpLoader(http: Http) {
      * ng-bootstrap
      */
     NgbModule.forRoot(),
+    NgbButtonsModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+    }),
     AdminModule
   ],
   exports: [
