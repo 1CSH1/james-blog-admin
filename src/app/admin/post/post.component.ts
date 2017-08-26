@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import {Component, Directive, OnInit, ViewContainerRef} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {Tag} from "../../model/Tag";
 import {Category} from "../../model/Category";
@@ -7,12 +7,16 @@ import {TagService} from "../tag/tag.service";
 import {CategoryService} from "../category/category.service";
 import {Article} from "../../model/Article";
 import {Result} from "../../model/Result";
+import {FileUploader, FileDropDirective, FileSelectDirective} from "ng2-file-upload";
+
+const url = '';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
+
 export class PostComponent implements OnInit {
 
   public checkModel:any = {left: false, middle: true, right: false};
@@ -27,6 +31,9 @@ export class PostComponent implements OnInit {
   public category: string = "";
   // 自定义标签
   public tag: string = "";
+  // 文件
+  public uploader: FileUploader = new FileUploader({url: url});
+  public hasBaseDropZoneOver:boolean = false;
 
 
   constructor(private toastr: ToastrService,
@@ -48,6 +55,10 @@ export class PostComponent implements OnInit {
       }
     });
 
+  }
+
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
   }
 
   save(event) {
@@ -108,15 +119,25 @@ export class PostComponent implements OnInit {
     this.postService.postArticle(article).subscribe(result => {
       if (result.error = '0000') {
         this.toastr.info(result.message, "提示");
+        this.clear();
       } else {
         this.toastr.error(result.message, "错误");
       }
     })
   }
 
+  /**
+   * 添加成功后清除内容
+   */
   clear() {
     this.category = "";
     this.tag = "";
+    for (let i = 0; i < this.categories.length; i++) {
+      this.categories[i].selected = false;
+    }
+    for (let i = 0; i < this.tags.length; i++) {
+      this.tags[i].selected = false;
+    }
   }
   /**
    * 设置选中分类时样色
@@ -143,4 +164,5 @@ export class PostComponent implements OnInit {
       tag.style = "btn-info";
     }
   }
+
 }

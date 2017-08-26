@@ -9,6 +9,7 @@ import {NgbButtonsModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TagService} from "./tag/tag.service";
 import {CategoryService} from "./category/category.service";
 import {PostService} from "./post/post.service";
+import {FileUploadModule} from "ng2-file-upload";
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {PostService} from "./post/post.service";
     RouterModule,
     RouterModule.forChild(adminRoutes),
     NgbModule.forRoot(),
-    NgbButtonsModule.forRoot()
+    NgbButtonsModule.forRoot(),
+    FileUploadModule
   ],
   declarations: [
     IndexComponent,
